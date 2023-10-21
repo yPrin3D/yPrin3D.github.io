@@ -192,17 +192,13 @@ document.addEventListener('mousedown', function(event) {
     }
 });
 
-document.addEventListener('mousedown', function(event) {
-    if (event.button === 0) {
+document.addEventListener('touchstart', function(event) {
+    // Zorg ervoor dat alleen enkele aanrakingen worden afgehandeld
+    if (event.touches.length === 1) {
         // Verberg de overlay-afbeelding
+        const overlayImage = document.getElementById('overlay-image');
         overlayImage.style.display = 'none';
     }
-});
-
-// Voeg een eventlistener toe voor touchstart op mobiele apparaten
-document.addEventListener('touchstart', function(event) {
-    // Verberg de overlay-afbeelding
-    overlayImage.style.display = 'none';
 });
 
 // Functie om een specifieke afbeelding weer te geven op basis van de index
