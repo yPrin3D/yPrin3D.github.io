@@ -192,6 +192,15 @@ document.addEventListener('mousedown', function(event) {
     }
 });
 
+document.addEventListener('touchstart', function(event) {
+    // Zorg ervoor dat alleen enkele aanrakingen worden afgehandeld
+    if (event.touches.length === 1) {
+        // Verberg de overlay-afbeelding
+        const overlayImage = document.getElementById('overlay-image');
+        overlayImage.style.display = 'none';
+    }
+});
+
 // Functie om een specifieke afbeelding weer te geven op basis van de index
 function showImage(index) {
     images.forEach((image, i) => {
