@@ -192,6 +192,19 @@ document.addEventListener('mousedown', function(event) {
     }
 });
 
+document.addEventListener('mousedown', function(event) {
+    if (event.button === 0) {
+        // Verberg de overlay-afbeelding
+        overlayImage.style.display = 'none';
+    }
+});
+
+// Voeg een eventlistener toe voor touchstart op mobiele apparaten
+document.addEventListener('touchstart', function(event) {
+    // Verberg de overlay-afbeelding
+    overlayImage.style.display = 'none';
+});
+
 // Functie om een specifieke afbeelding weer te geven op basis van de index
 function showImage(index) {
     images.forEach((image, i) => {
