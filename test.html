@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slideshow</title>
+    <style>
+        
+    #overlay-image {
+    position: absolute;
+    cursor: grab;
+    top: 0;
+    left: 0;
+    z-index: 1; /* Een hoge z-index-waarde zorgt ervoor dat de afbeelding bovenop alle andere elementen ligt */
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+    user-select: none;
+    pointer-events: none;
+}
+#overlay-image img {
+    user-select: none;
+    width: 100%; /* Zorgt ervoor dat de "zwart.png" afbeelding 100% breedte heeft van het overlay-element */
+}
+
+
+        #jsv-holder {
+            position: relative;
+        }
+
+        #image-gallery {
+            cursor: grab;
+            position: relative;
+            display: block; /* Voeg deze regel toe */
+        }
+
+        #image-gallery img {
+            height: 100%;
+            width: 100%;
+            user-select: none;
+            display: none;
+        }
+
+#startSlideshowButton {
+    width: auto;
+    height: 8vw; /* Gebruik vw voor de hoogte (8% van de viewport breedte) */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -7vw; /* Gebruik vw voor de afstand tot de onderkant (2% van de viewport breedte) */
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 0px 0px 20px 20px;
+    font-size: 4vw; /* Gebruik vw voor de lettergrootte (4% van de viewport breedte) */
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+#startSlideshowButton .text {
+    flex-grow: 1;
+    padding-left: 1vw; /* Gebruik vw voor de padding (1% van de viewport breedte) */
+    user-select: none;
+}
+
+#startSlideshowButton img {
+    height: 5vw; /* Gebruik vw voor de hoogte van het afbeeldingspictogram (5% van de viewport breedte) */
+    margin-right: 1vw; /* Gebruik vw voor de marge (1% van de viewport breedte) */
+    cursor: pointer;
+    user-select: none;
+}
+
+#spinImage {
+    height: 5vw; /* Gebruik vw voor de hoogte van het afbeeldingspictogram (5% van de viewport breedte) */
+    margin-right: 1vw; /* Gebruik vw voor de marge (1% van de viewport breedte) */
+    transition: transform 1.5s ease;
+    user-select: none;
+}
+
+#startSlideshowButton:hover {
+    background-color: #0056b3;
+}
+@media screen and (max-width: 1200px) {
+    #startSlideshowButton {
+        height: 7vw; /* Pas de hoogte aan voor kleinere schermen (10% van de viewport breedte) */
+        font-size: 2vw; /* Pas de lettergrootte aan voor kleinere schermen (5% van de viewport breedte) */
+    }
+    #startSlideshowButton .text {
+        font-size: 3.5vw; /* Pas de lettergrootte van de tekst aan voor kleinere schermen (4% van de viewport breedte) */
+    }
+    #startSlideshowButton img {
+        height: 6vw; /* Pas de hoogte van het afbeeldingspictogram aan voor kleinere schermen (6% van de viewport breedte) */
+    }
+}
+
+
+@media screen and (max-width: 992px) {
+    #startSlideshowButton {
+        height: 7vw; /* Pas de hoogte aan voor nog kleinere schermen (5% van de viewport breedte) */
+        font-size: 2vw; /* Pas de lettergrootte aan voor nog kleinere schermen (2% van de viewport breedte) */
+    }
+    #startSlideshowButton .text {
+        font-size: 3.5vw; /* Pas de lettergrootte van de tekst aan voor nog kleinere schermen (1.5% van de viewport breedte) */
+    }
+    #startSlideshowButton img {
+        height: 6vw; /* Pas de hoogte van het afbeeldingspictogram aan voor nog kleinere schermen (3% van de viewport breedte) */
+    }
+}
+
+
+    </style>
+</head>
+<body>
+    <div id="jsv-holder">
+        <div id="overlay-image">
+            <img src="Extra IMG/zwart.png">
+        </div>
+        <div id="image-gallery">
+            <img class="jsv-image" src="IMG/2.png">
+            <img class="jsv-image" src="IMG/3.png">
+            <img class="jsv-image" src="IMG/4.png">
+            <img class="jsv-image" src="IMG/5.png">
+            <img class="jsv-image" src="IMG/6.png">
+            <img class="jsv-image" src="IMG/7.png">
+            <img class="jsv-image" src="IMG/8.png">
+            <img class="jsv-image" src="IMG/9.png">
+            <img class="jsv-image" src="IMG/10.png">
+            <img class="jsv-image" src="IMG/11.png">
+            <img class="jsv-image" src="IMG/12.png">
+            <img class="jsv-image" src="IMG/13.png">
+            <img class="jsv-image" src="IMG/14.png">
+            <img class="jsv-image" src="IMG/15.png">
+            <img class="jsv-image" src="IMG/16.png">
+            <img class="jsv-image" src="IMG/17.png">
+            <img class="jsv-image" src="IMG/18.png">
+            <img class="jsv-image" src="IMG/19.png">
+            <img class="jsv-image" src="IMG/20.png">
+            <img class="jsv-image" src="IMG/21.png">
+            <img class="jsv-image" src="IMG/22.png">
+            <img class="jsv-image" src="IMG/23.png">
+            <img class="jsv-image" src="IMG/24.png">
+            <img class="jsv-image" src="IMG/25.png">
+            <img class="jsv-image" src="IMG/26.png">
+            <img class="jsv-image" src="IMG/27.png">
+            <img class="jsv-image" src="IMG/28.png">
+            <img class="jsv-image" src="IMG/29.png">
+            <img class="jsv-image" src="IMG/30.png">
+            <img class="jsv-image" src="IMG/31.png">
+            <img class="jsv-image" src="IMG/32.png">
+            <img class="jsv-image" src="IMG/33.png">
+            <img class="jsv-image" src="IMG/34.png">
+            <img class="jsv-image" src="IMG/35.png">
+            <img class="jsv-image" src="IMG/36.png">
+            <img class="jsv-image" src="IMG/37.png">
+            <img class="jsv-image" src="IMG/38.png">
+            <img class="jsv-image" src="IMG/39.png">
+            <img class="jsv-image" src="IMG/40.png">
+            <img class="jsv-image" src="IMG/41.png">
+            <img class="jsv-image" src="IMG/42.png">
+            <img class="jsv-image" src="IMG/43.png">
+            <img class="jsv-image" src="IMG/44.png">
+            <img class="jsv-image" src="IMG/45.png">
+        </div>
+        <div id="startSlideshowButton">
+            <span class="text">Spin 360°</span>
+            <img id="spinImage" src="Extra IMG/Cube geen achtergrond.png" alt="Afbeelding" style="cursor: pointer;">
+        </div>
+    </div>
+    <script>
+        const imageGallery = document.getElementById('image-gallery');
+        const images = document.querySelectorAll('.jsv-image');
+        const startSlideshowButton = document.getElementById('startSlideshowButton');
+        const spinImage = document.getElementById('spinImage');
+
+// Variabelen voor slepen
+let currentIndex = 0;
+let startX = null;
+let isDragging = false;
+let slideshowInterval;
+let rotating = false;
+let currentScale = 1.0;
+
+document.addEventListener('mousedown', function(event) {
+    if (event.button === 0) { // 0 staat voor de linkermuisknop
+        // Verberg de overlay-afbeelding
+        const overlayImage = document.getElementById('overlay-image');
+        overlayImage.style.display = 'none';
+    }
+});
+
+// Functie om een specifieke afbeelding weer te geven op basis van de index
+function showImage(index) {
+    images.forEach((image, i) => {
+        image.style.display = i === index ? 'block' : 'none';
+    });
+}
+
+// Voeg een event listener toe voor het laden van afbeeldingen
+images.forEach((image, index) => {
+    image.addEventListener('load', () => {
+        // Als de laatste afbeelding is geladen, start dan de diavoorstelling
+        if (index === images.length - 1) {
+            startSlideshow();
+        }
+        // Laat de afbeelding zien nadat deze is geladen
+        showImage(index);
+    });
+});
+
+// Voorkom het standaard drag-and-drop gedrag van afbeeldingen
+images.forEach((image) => {
+      image.addEventListener('dragstart', (e) => {
+        e.preventDefault();
+      });
+    });
+
+    imageGallery.addEventListener('mousedown', (e) => {
+      startX = e.clientX;
+      startY = e.clientY;
+      isDragging = true;
+      // Verander de cursor naar "grabbing" wanneer de muisknop wordt ingedrukt
+      imageGallery.style.cursor = 'grabbing';
+    });
+
+    imageGallery.addEventListener('mousemove', (e) => {
+      if (isDragging) {
+        const endX = e.clientX;
+        const endY = e.clientY;
+        const deltaX = endX - startX;
+        const deltaY = endY - startY;
+
+        if (deltaX > 10) { // Pas de waarde aan voor gevoeligheid
+          currentIndex = (currentIndex - 1 + images.length) % images.length;
+          showImage(currentIndex);
+          startX = endX; // Update de startpositie
+        } else if (deltaX < -10) { // Pas de waarde aan voor gevoeligheid
+          currentIndex = (currentIndex + 1) % images.length;
+          showImage(currentIndex);
+          startX = endX; // Update de startpositie
+        }
+
+      }
+    });
+
+    imageGallery.addEventListener('mouseup', () => {
+      startX = null;
+      startY = null;
+      isDragging = false;
+      // Verander de cursor terug naar "grab" wanneer de muisknop wordt losgelaten
+      imageGallery.style.cursor = 'grab';
+    });
+
+    //telefoon
+
+    imageGallery.addEventListener('touchstart', (e) => {
+          startX = e.touches[0].clientX;
+          startY = e.touches[0].clientY;
+          isDragging = true;
+          imageGallery.style.cursor = 'grabbing';
+        });
+
+        imageGallery.addEventListener('touchmove', (e) => {
+          if (isDragging) {
+            const endX = e.touches[0].clientX;
+            const endY = e.touches[0].clientY;
+            const deltaX = endX - startX;
+            const deltaY = endY - startY;
+
+            if (deltaX > 10) {
+              currentIndex = (currentIndex - 1 + images.length) % images.length;
+              showImage(currentIndex);
+              startX = endX;
+            } else if (deltaX < -10) {
+              currentIndex = (currentIndex + 1) % images.length;
+              showImage(currentIndex);
+              startX = endX;
+            }
+
+            if (currentScale > 1.0) {
+              isDragging = false;
+              showImageCheckbox.checked = false;
+            }
+          }
+        });
+
+        imageGallery.addEventListener('touchend', () => {
+          startX = null;
+          startY = null;
+          isDragging = false;
+          imageGallery.style.cursor = 'grab';
+        });
+
+        imageGallery.addEventListener('touchend', (e) => {
+          e.preventDefault(); // Voorkom standaardgedrag
+          startX = null;
+          startY = null;
+          isDragging = false;
+          imageGallery.style.cursor = 'grab';
+        });
+        
+
+
+
+// Functie om de diavoorstelling te starten
+function startSlideshow() {
+    if (slideshowInterval) {
+        clearInterval(slideshowInterval);
+    }
+
+    let counter = currentIndex;
+    let imageCount = images.length;
+
+    const slideshowFunction = () => {
+        showImage(counter);
+        counter = (counter + 1) % imageCount;
+        if (counter === currentIndex) {
+            clearInterval(slideshowInterval);
+        }
+    };
+
+    const rotateImage = () => {
+        if (!rotating) {
+            spinImage.style.transform = "rotate(360deg)";
+            rotating = true;
+        } else {
+            spinImage.style.transform = "rotate(0deg)";
+            rotating = false;
+        }
+    };
+
+    slideshowFunction();
+    slideshowInterval = setInterval(slideshowFunction, 70);
+    rotateImage();
+}
+
+// Event listener toevoegen voor starten diavoorstelling
+startSlideshowButton.addEventListener('click', startSlideshow);
+
+
+
+// Event listener toevoegen om de diavoorstelling bij het laden van de pagina te starten
+window.addEventListener('load', startSlideshow);
+    </script>
+</body>
+</html>

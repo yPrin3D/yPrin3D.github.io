@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iframe Voorbeeld</title>
+    <style>
+        /* Stijl voor de iframe-container */
+    #iframeContainer {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s; /* Voeg een overgang toe voor alle eigenschappen */
+}
+
+/* Stijl voor de iframe binnen de container */
+#externalIframeContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 45%; /* 80% van de breedte van de container */
+    height: 65%; /* 80% van de hoogte van de container */
+    transition: all 0.3s; /* Voeg een overgang toe voor alle eigenschappen */
+}
+
+/* Stijl voor de sluitenknop */
+#closeIframe {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 150%;
+    font-weight: bold;
+    background-color: rgba(255, 0, 0, 0.4);
+    color: rgb(255, 255, 255);
+    border: 3px solid red;
+    border-radius: 20%;
+    z-index: 10000;
+    padding: 0% 1%; /* Hier gebruiken we 5% voor de horizontale padding */
+    transition: background-color 0.3s, color 0.3s, transform 0.3s;
+    transition: all 0.3s;
+    user-select: none;
+}
+
+/* Hover-effect voor de sluitenknop */
+#closeIframe:hover {
+    background-color: red;
+}
+
+/* Verwijder de border rond de iframe */
+#externalIframe {
+    border: none;
+    width: 100%;
+    height: 100%;
+}
+
+/* Media query voor schermen kleiner dan 992px breed */
+@media screen and (min-width: 1201px) {
+    #externalIframeContainer {
+    width: 1000px; 
+    height: 700px;
+    }
+    #closeIframe {
+    font-size: 100%;
+    padding: 0 6px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    #externalIframeContainer {
+            width: 70%;
+            height: 580px;
+    }
+    #closeIframe {
+    font-size: 100%;
+    padding: 0 6px;
+    }
+}
+@media screen and (max-width: 992px) {
+    #externalIframeContainer {
+            width: 80%;
+            height: 550px;
+    }
+    #closeIframe {
+    font-size: 100%;
+    padding: 0 6px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #closeIframe {
+    font-size: 100%;
+    padding:
+     0 4px;
+    }
+    #externalIframeContainer {
+            width: 100%;
+            height: 420px;
+    }
+}
+@media screen and (max-width: 420px) {
+    #externalIframeContainer {
+            width: 100%;
+            height: 300px;
+    }
+}
+@media screen and (max-width: 390px) {
+    #externalIframeContainer {
+            width: 100%;
+            height: 265px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div id="iframeContainer">
+        <div id="externalIframeContainer">
+            <span id="closeIframe" onclick="closeIframe()">X</span> 
+            <iframe id="externalIframe"></iframe>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript om de iframe te laten verschijnen en dynamisch de src in te stellen
+        function showIframe() {
+            var iframeContainer = document.getElementById("iframeContainer");
+
+            // Controleer of de iframe al in de container is toegevoegd
+            var iframe = document.getElementById("externalIframe");
+            if (!iframe) {
+                // Voeg de iframe toe aan de container wanneer de knop wordt geklikt
+                iframe = document.createElement("iframe");
+                iframe.id = "externalIframe";
+                iframeContainer.appendChild(iframe);
+            }
+
+            // Dynamisch de src van de iframe instellen wanneer deze wordt opgeroepen
+            iframe.src = "test.html";
+
+            iframeContainer.style.display = "block";
+
+            // Voeg een click eventlistener toe aan het overlay-element
+            iframeContainer.addEventListener("click", function(event) {
+                if (event.target === iframeContainer) {
+                    closeIframe();
+                }
+            });
+        }
+
+        // JavaScript om de iframe te verbergen en de src te verwijderen
+        function closeIframe() {
+            var iframeContainer = document.getElementById("iframeContainer");
+            var iframe = document.getElementById("externalIframe");
+
+            iframeContainer.style.display = "none";
+
+            // Verwijder de src van de iframe om deze te stoppen
+            iframe.src = "";
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+<!-- Deel 2: De preview van hoe het eruit zal zien in een website -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Product Card/Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <style>
+
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+}
+body{
+    line-height: 1.5;
+}
+.card-wrapper{
+    max-width: 1100px;
+    margin: 0 auto;
+}
+img{
+    width: 100%;
+    display: block;
+}
+.img-display{
+    overflow: hidden;
+}
+.img-showcase{
+    display: flex;
+    width: 100%;
+    transition: all 0.5s ease;
+}
+.img-showcase img{
+    min-width: 100%;
+}
+.img-select{
+    display: flex;
+}
+.img-item{
+    margin: 0.3rem;
+}
+.img-item:nth-child(1),
+.img-item:nth-child(2),
+.img-item:nth-child(3){
+    margin-right: 0;
+}
+.img-item:hover{
+    opacity: 0.8;
+}
+.product-content{
+    padding: 2rem 1rem;
+}
+.product-title{
+    font-size: 3rem;
+    text-transform: capitalize;
+    font-weight: 700;
+    position: relative;
+    color: #12263a;
+    margin: 1rem 0;
+}
+.product-title::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 4px;
+    width: 80px;
+    background: #12263a;
+}
+.product-link{
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 0.9rem;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    background: #256eff;
+    color: #fff;
+    padding: 0 0.3rem;
+    transition: all 0.5s ease;
+}
+.product-link:hover{
+    opacity: 0.9;
+}
+.product-rating{
+    color: #ffc107;
+}
+.product-rating span{
+    font-weight: 600;
+    color: #252525;
+}
+.product-price{
+    margin: 1rem 0;
+    font-size: 1rem;
+    font-weight: 700;
+}
+.product-price span{
+    font-weight: 400;
+}
+.last-price span{
+    color: #f64749;
+    text-decoration: line-through;
+}
+.new-price span{
+    color: #256eff;
+}
+.product-detail h2{
+    text-transform: capitalize;
+    color: #12263a;
+    padding-bottom: 0.6rem;
+}
+.product-detail p{
+    font-size: 0.9rem;
+    padding: 0.3rem;
+    opacity: 0.8;
+}
+.product-detail ul{
+    margin: 1rem 0;
+    font-size: 0.9rem;
+}
+.product-detail ul li{
+    margin: 0;
+    list-style: none;
+    background: url(imagesProductPage/checked.png) left center no-repeat;
+    background-size: 18px;
+    padding-left: 1.7rem;
+    margin: 0.4rem 0;
+    font-weight: 600;
+    opacity: 0.9;
+}
+.product-detail ul li span{
+    font-weight: 400;
+}
+.purchase-info{
+    margin: 1.5rem 0;
+}
+.purchase-info input,
+.purchase-info .btn{
+    border: 1.5px solid #ddd;
+    border-radius: 25px;
+    text-align: center;
+    padding: 0.45rem 0.8rem;
+    outline: 0;
+    margin-right: 0.2rem;
+    margin-bottom: 1rem;
+}
+.purchase-info input{
+    width: 60px;
+}
+.purchase-info .btn{
+    cursor: pointer;
+    color: #fff;
+}
+.purchase-info .btn:first-of-type{
+    background: #256eff;
+}
+.purchase-info .btn:last-of-type{
+    background: #f64749;
+}
+.purchase-info .btn:hover{
+    opacity: 0.9;
+}
+.social-links{
+    display: flex;
+    align-items: center;
+}
+.social-links a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    color: #000;
+    border: 1px solid #000;
+    margin: 0 0.2rem;
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: all 0.5s ease;
+}
+.social-links a:hover{
+    background: #000;
+    border-color: transparent;
+    color: #fff;
+}
+
+/* grote veranderen */
+@media screen and (min-width: 992px){
+    .card{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 1.5rem;
+    }
+    .card-wrapper{
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .product-imgs{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .product-content{
+        padding-top: 0;
+    }
+    .img-display {
+  position: relative; /* Nodig om absolute positionering binnen img-display te laten werken */
+    }  
+}
+
+
+/* Deze is voor het openen van de Iframe */
+.overlay-image {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  display: inline-block;
+  padding: 1% 2%; /* Responsieve padding in percentages */
+  font-size: 120%; /* Responsieve lettergrootte */
+  background-color: #4CAF50; /* Groene achtergrondkleur */
+  color: #fff;
+  border: none;
+  border-radius: 0px 0px 0px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+/* Stijl voor de knop bij hover (muis eroverheen) */
+.overlay-image:hover {
+  background-color: #45a049; /* Donkergroene achtergrondkleur bij hover */
+  transform: scale(1.05);
+}
+
+/* Stijl voor de knop bij actieve toestand (klikken) */
+.overlay-image:active {
+  transform: scale(0.95);
+}
+
+/* Stijl voor de knop bij focus (tab-toets navigatie) */
+.overlay-image:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.5);
+}
+
+  
+
+
+
+
+    </style>
+</head>
+<body>
+    
+    <div class="card-wrapper">
+        <div class="card">
+            <!-- card left -->
+            <div class="product-imgs">
+                <div class="img-display">
+                    <div class="img-showcase">
+                        <img src="imagesProductPage/1.jpg" alt="shoe image">
+                        <img src="imagesProductPage/2.jpg" alt="shoe image">
+                        <img src="imagesProductPage/3.jpg" alt="shoe image">
+                        <img src="imagesProductPage/4.jpg" alt="shoe image">
+                    </div>
+                    <!-- Foto voor het openen van Iframe -->
+                    <button alt="360 foto" class="overlay-image" onclick="showIframe()">View in 3D</button>
+                </div>              
+                <div class="img-select">
+                    <div class="img-item">
+                        <a href="#" data-id="1">
+                            <img src="imagesProductPage/1.jpg" alt="shoe image">
+                        </a>
+                    </div>
+                    <div class="img-item">
+                        <a href="#" data-id="2">
+                            <img src="imagesProductPage/2.jpg" alt="shoe image">
+                        </a>
+                    </div>
+                    <div class="img-item">
+                        <a href="#" data-id="3">
+                            <img src="imagesProductPage/3.jpg" alt="shoe image">
+                        </a>
+                    </div>
+                    <div class="img-item">
+                        <a href="#" data-id="4">
+                            <img src="imagesProductPage/4.jpg" alt="shoe image">
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-content">
+                <h2 class="product-title">Porsche 911</h2>
+                <div class="product-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                    <span>4.7(21)</span>
+                </div>
+
+                <div class="product-price">
+                    <p class="last-price">Old Price: <span>$172.290</span></p>
+                    <p class="new-price">New Price: <span>$165.000</span></p>
+                </div>
+
+                <div class="product-detail">
+                    <h2>about this item: </h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo eveniet veniam tempora fuga tenetur placeat sapiente architecto illum soluta consequuntur, aspernatur quidem at sequi ipsa!</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, perferendis eius. Dignissimos, labore suscipit. Unde.</p>
+                    <ul>
+                        <li>Color: <span>Black</span></li>
+                        <li>Available: <span>in stock</span></li>
+                        <li>Category: <span>Car</span></li>
+                        <li>Shipping Area: <span>All over the world</span></li>
+                        <li>Shipping Fee: <span>Free</span></li>
+                    </ul>
+                </div>
+
+                <div class="purchase-info">
+                    <input type="number" min="0" value="1">
+                    <button type="button" class="btn">
+                        Add to Cart <i class="fas fa-shopping-cart"></i>
+                    </button>
+                    <button type="button" class="btn">Compare</button>
+                </div>
+
+                <div class="social-links">
+                    <p>Share At: </p>
+                    <a href="#">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="#">
+                        <i class="fab fa-pinterest"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const imgs = document.querySelectorAll('.img-select a');
+        const imgBtns = [...imgs];
+        let imgId = 1;
+
+        imgBtns.forEach((imgItem) => {
+            imgItem.addEventListener('click', (event) => {
+                event.preventDefault();
+                imgId = imgItem.dataset.id;
+                slideImage();
+            });
+        });
+
+        function slideImage() {
+            const displayWidth = document.querySelector('.img-showcase img:first-child').clientWidth;
+
+            document.querySelector('.img-showcase').style.transform = `translateX(${- (imgId - 1) * displayWidth}px)`;
+        }
+
+        window.addEventListener('resize', slideImage);
+    </script>
+</body>
+</html>
+
